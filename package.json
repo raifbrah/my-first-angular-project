@@ -1,7 +1,6 @@
 {
   "name": "my-first-angular-project",
   "version": "0.0.0",
-  "description": "Test description",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
