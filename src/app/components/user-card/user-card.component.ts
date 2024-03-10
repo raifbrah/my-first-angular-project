@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'user-card',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.css'
 })
