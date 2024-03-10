@@ -20,6 +20,10 @@ export class UsersListComponent {
 
   users: User[] = []
 
+  deleteUserCard(index: number) {
+    this.usersService.deleteUser(index);
+  }
+
   ngOnInit() {
     this.usersApiService
       .getUsers()

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'user-card',
@@ -8,5 +8,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './user-card.component.css'
 })
 export class UserCardComponent {
-  @Input() user: any
+  @Input()
+  user: any
+
+  @Output()
+  onDelete = new EventEmitter<string>()
+
+  deleteUserCard() {
+    this.onDelete.emit()
+  }
 }

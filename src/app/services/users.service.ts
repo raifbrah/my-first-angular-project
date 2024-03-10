@@ -12,4 +12,8 @@ export class UsersService {
   getUsers(): User[] {
     return this.users
   }
+
+  deleteUser(index: number): void {
+    this.users.splice(index, 1)
+  }
 }
