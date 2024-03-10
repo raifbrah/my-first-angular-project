@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserCardComponent } from '../user-card/user-card.component';
+import { Component } from '@angular/core';
+import { UserCardComponent } from '../../components/user-card/user-card.component';
 import { UsersApiService } from '../../services/users-api.service';
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
