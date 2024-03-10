@@ -1,7 +1,28 @@
 .links {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-.active {
+
+.link-btn {
+  --box-shadow: 1px 1px 2px #0005;
+  cursor: pointer;
+  color: #000;
+  font-family: sans-serif;
+  padding: 5px 10px;
+  background: #ccc;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid #777;
+  box-shadow: var(--box-shadow);
+}
+.link-btn.active {
   color: red;
+  box-shadow: inset var(--box-shadow);
+}
+
+.app-component-container {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
 }

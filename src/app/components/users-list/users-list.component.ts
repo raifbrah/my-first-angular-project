@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { UserCardComponent } from '../user-card/user-card.component';
-import {UsersApiService} from '../../services/users-api.service';
-import {UsersService} from '../../services/users.service';
+import { UsersApiService } from '../../services/users-api.service';
+import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
-import {User} from '../../interfaces/user';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-users-list',
@@ -20,7 +20,7 @@ export class UsersListComponent {
 
   users: User[] = []
 
-  pushUsers(): void {
+  ngOnInit() {
     this.usersApiService
       .getUsers()
       .subscribe((data: any) => {
