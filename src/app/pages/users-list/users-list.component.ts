@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../interfaces/user';
 import { Subject, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { UserDialogComponent } from '../../components/user-dialog/user-dialog.component';
 
 @Component({
   selector: 'app-users-list',
@@ -25,7 +27,12 @@ export class UsersListComponent {
   constructor(
     private usersApiService: UsersApiService,
     private usersService: UsersService,
+    private matDialog: MatDialog,
   ) { }
+
+  openDialog() {
+    this.matDialog.open(UserDialogComponent)
+  }
 
   deleteUserCard(index: number) {
     this.usersService.deleteUser(index);
