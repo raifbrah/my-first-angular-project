@@ -1,7 +1,14 @@
-<div class="user-cards-container">
-  <user-card
-    *ngFor="let user of users; let i = index"
-    [user]="user"
-    (onDelete)="deleteUserCard(i)"
-  ></user-card>
+<div class="user-list">
+  <button
+    color="primary"
+    mat-flat-button
+  >Add User</button>
+  <div class="user-cards-container">
+    <user-card
+      *ngFor="let user of users; let i = index"
+      [user]="user"
+      (onDelete)="deleteUserCard(i)"
+      class="user-card"
+    ></user-card>
+  </div>
 </div>

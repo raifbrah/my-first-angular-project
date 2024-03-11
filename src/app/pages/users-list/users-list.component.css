@@ -1,5 +1,25 @@
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .user-cards-container {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
+}
+
+.user-card {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  min-width: 200px;
+  max-width: 400px;
+  word-wrap: break-word;
 }

@@ -1,16 +1,14 @@
-<div class="user-card-container">
-  <ul class="user-card-parameters">
-    <li>ID: {{ user.id }}</li>
-    <li>Name: {{ user.name }}</li>
-    <li>Username: {{ user.username }}</li>
-    <li>Email: {{ user.email }}</li>
-  </ul>
-  <button
-    mat-stroked-button
-    color="warn"
-    (click)="deleteUserCard()"
-    class="delete-button"
-  >
-    Delete
-  </button>
-</div>
+<ul class="user-card-parameters">
+  <li>ID: {{ user.id }}</li>
+  <li>Name: {{ user.name }}</li>
+  <li>Username: {{ user.username }}</li>
+  <li>Email: {{ user.email }}</li>
+</ul>
+<button
+  mat-stroked-button
+  color="warn"
+  (click)="deleteUserCard()"
+  class="delete-button"
+>
+  Delete
+</button>
