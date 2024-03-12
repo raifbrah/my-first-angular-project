@@ -7,7 +7,7 @@ import { User } from '../../interfaces/user';
 import { Subject, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { UserDialogComponent } from '../../components/user-dialog/user-dialog.component';
+import { CreateEditUserComponent } from '../../components/create-edit-user/create-edit-user.component';
 
 @Component({
   selector: 'app-users-list',
@@ -21,17 +21,16 @@ import { UserDialogComponent } from '../../components/user-dialog/user-dialog.co
   styleUrl: './users-list.component.css'
 })
 export class UsersListComponent {
-  users: User[] = []
   private destroy$ = new Subject<null>();
 
   constructor(
     private usersApiService: UsersApiService,
-    private usersService: UsersService,
+    public usersService: UsersService,
     private matDialog: MatDialog,
   ) { }
 
   openDialog() {
-    this.matDialog.open(UserDialogComponent)
+    this.matDialog.open(CreateEditUserComponent)
   }
 
   deleteUserCard(index: number) {
@@ -44,7 +43,6 @@ export class UsersListComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: User[]) => {
         this.usersService.addUsers(data)
-        this.users = this.usersService.getUsers()
       })
   }
 

@@ -6,7 +6,7 @@
   >Add User</button>
   <div class="user-cards-container">
     <user-card
-      *ngFor="let user of users; let i = index"
+      *ngFor="let user of usersService.users; let i = index"
       [user]="user"
       (onDelete)="deleteUserCard(i)"
       class="user-card"

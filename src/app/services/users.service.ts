@@ -9,6 +9,10 @@ export class UsersService {
     this.users = value
   }
 
+  pushUser(value: User) {
+    this.users.push(value)
+  }
+
   getUsers(): User[] {
     return this.users
   }

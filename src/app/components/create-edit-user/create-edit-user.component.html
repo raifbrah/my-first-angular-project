@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Adding User Card</h2>
+<mat-dialog-content>
+  <form [formGroup]="myForm" class="create-edit-user__form">
+    <mat-form-field>
+      <mat-label>Enter your name</mat-label>
+      <input
+        matInput
+        formControlName="name"
+      />
+      @if(myForm.controls["name"].invalid && myForm.controls["name"].touched) {
+        <mat-error>
+          Incoorect name!
+        </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Enter your username</mat-label>
+      <input
+        matInput
+        formControlName="username"
+      />
+      @if(myForm.controls["username"].invalid && myForm.controls["username"].touched) {
+        <mat-error>
+          Incoorect username!
+        </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        placeholder="mail@gmail.com"
+      />
+      @if(myForm.controls["email"].invalid && myForm.controls["email"].touched) {
+        <mat-error>
+          Incorrect email!
+        </mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    (click)="addUserCard()"
+    [disabled]="myForm.invalid"
+    color="primary"
+    mat-flat-button
+    mat-dialog-close
+  >Save</button>
+  <button
+    mat-stroked-button
+    mat-dialog-close
+  >Close</button>
+</mat-dialog-actions>
