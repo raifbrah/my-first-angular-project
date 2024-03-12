@@ -46,8 +46,15 @@ export class CreateEditUserComponent {
   })
 
   addUserCard() {
-    this.usersService.pushUser(
-      this.myForm.value
-    )
+    let newUserId = 1
+
+    if (this.usersService.users.length) {
+      newUserId = this.usersService.users[this.usersService.users.length - 1].id + 1
+    }
+
+    this.usersService.pushUser({
+      id: newUserId,
+      ...this.myForm.value
+    })
   }
 }

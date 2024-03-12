@@ -9,15 +9,15 @@ export class UsersService {
     this.users = value
   }
 
-  pushUser(value: User) {
-    this.users.push(value)
+  pushUser(user: User) {
+    this.users.push(user)
   }
 
   getUsers(): User[] {
     return this.users
   }
 
-  deleteUser(index: number): void {
-    this.users.splice(index, 1)
+  deleteUser(user: User): void {
+    this.users = this.users.filter(value => value !== user)
   }
 }

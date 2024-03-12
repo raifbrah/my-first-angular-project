@@ -33,8 +33,8 @@ export class UsersListComponent {
     this.matDialog.open(CreateEditUserComponent)
   }
 
-  deleteUserCard(index: number) {
-    this.usersService.deleteUser(index);
+  deleteUser(user: User) {
+    this.usersService.deleteUser(user);
   }
 
   ngOnInit() {

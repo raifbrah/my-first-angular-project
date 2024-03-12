@@ -13,9 +13,9 @@ export class UserCardComponent {
   user: any
 
   @Output()
-  onDelete = new EventEmitter<string>()
+  deleteUser = new EventEmitter<string>()
 
   deleteUserCard() {
-    this.onDelete.emit()
+    this.deleteUser.emit()
   }
 }
