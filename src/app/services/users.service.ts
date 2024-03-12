@@ -18,6 +18,6 @@ export class UsersService {
   }
 
   deleteUser(user: User): void {
-    this.users = this.users.filter(value => value !== user)
+    this.users = this.users.filter(value => value.id !== user.id)
   }
 }
