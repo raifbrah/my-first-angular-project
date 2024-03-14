@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  FormControl,
+  FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -11,12 +11,14 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsersService } from '../../services/users.service';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'create-edit-user-dialog',
   standalone: true,
   imports: [
+    NgIf,
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
@@ -28,22 +30,28 @@ import { UsersService } from '../../services/users.service';
   styleUrl: './create-edit-user.component.css'
 })
 export class CreateEditUserComponent {
-  constructor(private usersService: UsersService) {}
+  myForm: FormGroup
 
-  myForm: FormGroup = new FormGroup({
-    "name": new FormControl(
-      "",
-      Validators.required
-    ),
-    "username": new FormControl(
-      "",
-      Validators.required
-    ),
-    "email": new FormControl("", [
-      Validators.required,
-      Validators.email
-    ]),
-  })
+  constructor(
+    private usersService: UsersService,
+    private fb: FormBuilder
+  ) {
+    this._createForm()
+  }
+
+  private _createForm() {
+    this.myForm = this.fb.group({
+      name: ['', Validators.required],
+      username: ['', Validators.required],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+    })
+  }
 
   addUserCard() {
     let newUserId = 1

@@ -7,11 +7,9 @@
         matInput
         formControlName="name"
       />
-      @if(myForm.controls["name"].invalid && myForm.controls["name"].touched) {
-        <mat-error>
-          Incoorect name!
-        </mat-error>
-      }
+      <mat-error *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched">
+        Incoorect name!
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your username</mat-label>
@@ -19,11 +17,9 @@
         matInput
         formControlName="username"
       />
-      @if(myForm.controls["username"].invalid && myForm.controls["username"].touched) {
-        <mat-error>
-          Incoorect username!
-        </mat-error>
-      }
+      <mat-error *ngIf="myForm.controls['username'].invalid && myForm.controls['username'].touched">
+        Incoorect username!
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your email</mat-label>
@@ -32,11 +28,9 @@
         formControlName="email"
         placeholder="mail@gmail.com"
       />
-      @if(myForm.controls["email"].invalid && myForm.controls["email"].touched) {
-        <mat-error>
-          Incorrect email!
-        </mat-error>
-      }
+      <mat-error *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched">
+        Incorrect email!
+      </mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>
