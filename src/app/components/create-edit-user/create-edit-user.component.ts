@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -30,31 +30,19 @@ import { NgIf } from '@angular/common';
   styleUrl: './create-edit-user.component.css'
 })
 export class CreateEditUserComponent {
-  myForm: FormGroup
-
   constructor(
     private usersService: UsersService,
-    private fb: FormBuilder
-  ) {
-    this._createForm()
-  }
+  ) {}
 
-  private _createForm() {
-    this.myForm = this.fb.group({
-      name: ['', Validators.required],
-      username: ['', Validators.required],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ],
-    })
-  }
+  public myForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+  })
 
   addUserCard() {
-    let newUserId = 1
+    let newUserId: number = 1
+
 
     if (this.usersService.users.length) {
       newUserId = this.usersService.users[this.usersService.users.length - 1].id + 1
