@@ -4,11 +4,19 @@
   <li>Username: {{ user.username }}</li>
   <li>Email: {{ user.email }}</li>
 </ul>
-<button
-  mat-stroked-button
-  color="warn"
-  (click)="deleteUserCard()"
-  class="delete-button"
->
-  Delete
-</button>
+<div class="buttons-container">
+  <button
+    mat-stroked-button
+    color="warn"
+    (click)="deleteUserCard()"
+  >
+    Delete
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="editUserCard()"
+  >
+    Edit
+  </button>
+</div>

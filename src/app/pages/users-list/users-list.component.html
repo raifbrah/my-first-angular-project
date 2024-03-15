@@ -1,6 +1,6 @@
 <div class="user-list">
   <button
-    (click)="openDialog()"
+    (click)="addUser()"
     color="primary"
     mat-flat-button
   >Add User</button>
@@ -9,6 +9,7 @@
       *ngFor="let user of usersService.users"
       [user]="user"
       (deleteUser)="deleteUser(user)"
+      (editUser)="editUser(user)"
       class="user-card"
     ></user-card>
   </div>

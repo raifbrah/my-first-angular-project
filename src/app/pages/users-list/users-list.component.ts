@@ -29,12 +29,33 @@ export class UsersListComponent {
     private matDialog: MatDialog,
   ) { }
 
-  openDialog() {
-    this.matDialog.open(CreateEditUserComponent)
+  addUser() {
+    let dialogRef = this.matDialog.open(
+      CreateEditUserComponent, 
+    )
+    dialogRef.afterClosed().subscribe((user: User) => {
+      if (user) {
+        this.usersService.pushUser(user)
+      }
+    })
   }
 
   deleteUser(user: User) {
     this.usersService.deleteUser(user);
+  }
+
+  editUser(user: User) {
+    let dialogRef = this.matDialog.open(
+      CreateEditUserComponent,
+      {data: user}
+    )
+    dialogRef.componentInstance.isEdit = true
+
+    dialogRef.afterClosed().subscribe((user: User) => {
+      if (user) {
+        this.usersService.editUser(user)
+      }
+    })
   }
 
   ngOnInit() {

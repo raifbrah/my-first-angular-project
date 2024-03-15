@@ -6,3 +6,8 @@
   margin: 0;
   list-style: none;
 }
+
+.buttons-container {
+  display: flex;
+  gap: 5px;
+}

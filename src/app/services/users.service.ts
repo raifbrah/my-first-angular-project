@@ -13,6 +13,14 @@ export class UsersService {
     this.users.push(user)
   }
 
+  editUser(user: User) {
+    this.users.map(value => {
+      if (value.id === user.id) {
+        Object.assign(value, user)
+      }
+    })
+  }
+
   getUsers(): User[] {
     return this.users
   }
