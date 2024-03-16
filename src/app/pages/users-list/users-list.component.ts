@@ -59,12 +59,22 @@ export class UsersListComponent {
   }
 
   ngOnInit() {
-    this.usersApiService
-      .getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: User[]) => {
-        this.usersService.addUsers(data)
-      })
+    if (
+      !localStorage["users"]
+      || JSON.parse(localStorage["users"]).length === 0
+    ) {
+      this.usersApiService
+        .getUsers()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data: User[]) => {
+          localStorage["users"] = JSON.stringify(data)
+          this.usersService.addUsers(data)
+        })
+    } else {
+      this.usersService.addUsers(
+        JSON.parse(localStorage["users"])
+      )
+    }
   }
 
   ngOnDestroy() {

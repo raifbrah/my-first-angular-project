@@ -11,6 +11,7 @@ export class UsersService {
 
   pushUser(user: User) {
     this.users.push(user)
+    localStorage["users"] = JSON.stringify(this.users)
   }
 
   editUser(user: User) {
@@ -19,6 +20,7 @@ export class UsersService {
         Object.assign(value, user)
       }
     })
+    localStorage["users"] = JSON.stringify(this.users)
   }
 
   getUsers(): User[] {
@@ -27,5 +29,6 @@ export class UsersService {
 
   deleteUser(user: User): void {
     this.users = this.users.filter(value => value.id !== user.id)
+    localStorage["users"] = JSON.stringify(this.users)
   }
 }
