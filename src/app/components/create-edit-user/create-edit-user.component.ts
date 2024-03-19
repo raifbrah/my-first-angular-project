@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsersService } from '../../services/users.service';
 import { NgIf } from '@angular/common';
+import { User } from '../../interfaces/user.interface';
 
 
 @Component({
@@ -31,13 +32,12 @@ import { NgIf } from '@angular/common';
 })
 export class CreateEditUserComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    @Inject(MAT_DIALOG_DATA) private readonly data: User,
     private usersService: UsersService,
-    public dialogRef: MatDialogRef<CreateEditUserComponent>
-  ) {}
-
-  public isEdit: boolean = false
-  private userId: number = 1
+    private dialogRef: MatDialogRef<CreateEditUserComponent>
+  ) {
+    this.myForm.patchValue(this.data)
+  }
 
   public myForm: FormGroup = new FormGroup({
     name: new FormControl("", [Validators.required]),
@@ -45,25 +45,20 @@ export class CreateEditUserComponent {
     email: new FormControl("", [Validators.required, Validators.email]),
   })
 
-  ngOnInit() {
-    this.myForm.patchValue(this.data)
-  }
-
-  addUserCard() {
-    if (this.usersService.users.length) {
-      this.userId = this.usersService.users[this.usersService.users.length - 1].id + 1
-    }
-
+  addUserCard(): void {
     this.dialogRef.close({
-      id: this.userId,
       ...this.myForm.value
     })
   }
 
-  editUserCard() {
+  editUserCard(): void {
     this.dialogRef.close({
       id: this.data.id,
       ...this.myForm.value
     })
+  }
+
+  get isEdit(): boolean {
+    return Boolean(this.data)
   }
 }

@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>Adding User Card</h2>
+<h2 mat-dialog-title *ngIf="!isEdit">Add User</h2>
+<h2 mat-dialog-title *ngIf="isEdit">Edit User</h2>
+
 <mat-dialog-content>
   <form [formGroup]="myForm" class="create-edit-user__form">
     <mat-form-field>
