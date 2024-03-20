@@ -11,7 +11,7 @@ export class UsersService {
   users: User[] = []
 
   public addUser(value: User): void {
-    value.id = this.generateUserId()
+    value.id = new Date().getTime()
     this.users = [...this.users, value]
     this.storageService.setItem('users', this.users)
   }
@@ -31,13 +31,5 @@ export class UsersService {
   public deleteUser(user: User): void {
     this.users = this.users.filter(value => value.id !== user.id)
     this.storageService.setItem('users', this.users)
-  }
-
-  private generateUserId(): number {
-    let userId = 0
-    if (this.users.length) {
-      userId = this.users[this.users.length - 1].id + 1
-    }
-    return userId
   }
 }
