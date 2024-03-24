@@ -1,15 +1,17 @@
 <div class="user-list">
   <button
-    (click)="addUser()"
+    (click)="addEditUser()"
     color="primary"
     mat-flat-button
-  >Add User</button>
+  >
+    Add User
+  </button>
   <div class="user-cards-container">
     <user-card
       *ngFor="let user of usersService.users"
       [user]="user"
       (deleteUser)="deleteUser(user)"
-      (editUser)="editUser(user)"
+      (editUser)="addEditUser(user)"
       class="user-card"
     ></user-card>
   </div>

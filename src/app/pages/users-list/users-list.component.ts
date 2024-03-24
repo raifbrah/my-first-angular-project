@@ -44,34 +44,22 @@ export class UsersListComponent {
     }
   }
 
-  addUser() {
+  addEditUser(user?: User) {
     const dialogRef = this.matDialog.open(
       CreateEditUserComponent,
+      {data: user}
     )
     dialogRef.afterClosed()
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: User) => {
       if (user) {
-        this.usersService.addUser(user)
+        this.usersService.addEditUser(user)
       }
     })
   }
 
   deleteUser(user: User) {
     this.usersService.deleteUser(user);
-  }
-
-  editUser(user: User) {
-    const dialogRef = this.matDialog.open(
-      CreateEditUserComponent,
-      {data: user}
-    )
-
-    dialogRef.afterClosed().subscribe((user: User) => {
-      if (user) {
-        this.usersService.editUser(user)
-      }
-    })
   }
 
   ngOnDestroy() {

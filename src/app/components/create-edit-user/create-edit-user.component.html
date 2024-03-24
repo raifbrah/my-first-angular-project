@@ -39,19 +39,11 @@
 
 <mat-dialog-actions align="end">
   <button
-    *ngIf="!isEdit"
     (click)="addUserCard()"
     [disabled]="myForm.invalid"
     color="primary"
     mat-flat-button
-  >Create</button>
-  <button
-    *ngIf="isEdit"
-    (click)="editUserCard()"
-    [disabled]="myForm.invalid"
-    color="primary"
-    mat-flat-button
-  >Save</button>
+  >{{isEdit ? "Save" : "Create"}}</button>
   <button
     mat-stroked-button
     mat-dialog-close

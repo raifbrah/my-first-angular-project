@@ -10,22 +10,20 @@ export class UsersService {
 
   users: User[] = []
 
-  public addUser(value: User): void {
-    value.id = new Date().getTime()
-    this.users = [...this.users, value]
-    this.storageService.setItem('users', this.users)
-  }
-
-  public editUser(user: User): void {
-    const newUsers = this.users.map(value => {
-      if (value.id === user.id) {
-        return {...value, ...user}
-      } else {
-        return value
-      }
-    })
-    this.users = newUsers
-    this.storageService.setItem('users', this.users)
+  public addEditUser(user: User): void {
+    if (user.id) {
+      this.users = this.users.map(value => {
+        return value.id === user.id
+          ? {...value, ...user}
+          : value
+      })
+      this.storageService.setItem('users', this.users)
+    } else {
+      const newUser = {...user}
+      newUser.id = new Date().getTime()
+      this.users = [...this.users, newUser]
+      this.storageService.setItem('users', this.users)
+    }
   }
 
   public deleteUser(user: User): void {
