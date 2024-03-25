@@ -19,9 +19,10 @@ export class UsersService {
       })
       this.storageService.setItem('users', this.users)
     } else {
-      const newUser = {...user}
-      newUser.id = new Date().getTime()
-      this.users = [...this.users, newUser]
+      this.users = [
+        ...this.users,
+        {...user, id: new Date().getTime()}
+      ]
       this.storageService.setItem('users', this.users)
     }
   }
