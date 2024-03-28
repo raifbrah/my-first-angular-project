@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { User } from "../interfaces/user.interface";
-import { StorageService } from "./storage.service";
+import { User } from "../models/user.interface";
+import { StorageService } from "../../../core/services/storage.service";
 
 @Injectable({ providedIn: "root" })
 export class UsersService {
@@ -12,10 +12,10 @@ export class UsersService {
 
   public addEditUser(user: User): void {
     if (user.id) {
-      this.users = this.users.map(value => {
-        return value.id === user.id
-          ? {...value, ...user}
-          : value
+      this.users = this.users.map(mapUser => {
+        return mapUser.id === user.id
+          ? {...mapUser, ...user}
+          : mapUser
       })
       this.storageService.setItem('users', this.users)
     } else {
@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   public deleteUser(user: User): void {
-    this.users = this.users.filter(value => value.id !== user.id)
+    this.users = this.users.filter(filterUser => filterUser.id !== user.id)
     this.storageService.setItem('users', this.users)
   }
 }

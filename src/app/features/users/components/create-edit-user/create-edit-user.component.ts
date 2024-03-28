@@ -11,7 +11,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
-import { User } from '../../interfaces/user.interface';
+import { User } from '../../models/user.interface';
 
 
 @Component({

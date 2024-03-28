@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { UserCardComponent } from '../../components/user-card/user-card.component';
+import { UserCardComponent } from '../user-card/user-card.component';
 import { UsersApiService } from '../../services/users-api.service';
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
-import { User } from '../../interfaces/user.interface';
+import { User } from '../../models/user.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateEditUserComponent } from '../../components/create-edit-user/create-edit-user.component';
-import { StorageService } from '../../services/storage.service';
+import { CreateEditUserComponent } from '../create-edit-user/create-edit-user.component';
+import { StorageService } from '../../../../core/services/storage.service';
 
 @Component({
   selector: 'app-users-list',

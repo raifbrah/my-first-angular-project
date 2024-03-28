@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import { User } from '../../interfaces/user.interface';
+import { User } from '../../models/user.interface';
 
 @Component({
   selector: 'user-card',
