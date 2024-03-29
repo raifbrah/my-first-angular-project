@@ -6,6 +6,7 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import {
+    AbstractControl,
   FormControl,
   FormGroup,
   FormsModule,
@@ -49,9 +50,9 @@ export class CreateEditUserComponent {
   });
 
   public addUserCard(): void {
-    if (this.user) {
+    if (this.isEdit) {
       this.dialogRef.close({
-        id: this.user.id,
+        id: this.user!.id,
         ...this.myForm.value,
       });
     } else {
@@ -59,12 +60,9 @@ export class CreateEditUserComponent {
     }
   }
 
-  public isFormControlInvalid(formName: string): boolean {
-    return (
-      this.myForm.controls[formName].invalid &&
-      this.myForm.controls['name'].touched
-    );
-  }
+  // field<T extends AbstractControl>(fieldName: string): T {
+  //   return this.myForm.get(fieldName) as T
+  // }
 
   get isEdit(): boolean {
     return Boolean(this.user);
