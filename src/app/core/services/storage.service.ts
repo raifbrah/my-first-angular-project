@@ -11,10 +11,14 @@ export class StorageService {
   }
 
   getItem(key: string): any {
-    const users = localStorage.getItem(key)
+    const value = localStorage.getItem(key)
 
-    if (typeof users === 'string') {
-      return JSON.parse(users)
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value)
+      } catch(err) {
+        throw err
+      }
     } else {
       return null
     }
