@@ -6,7 +6,6 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import {
-    AbstractControl,
   FormControl,
   FormGroup,
   FormsModule,
@@ -43,26 +42,28 @@ export class CreateEditUserComponent {
     }
   }
 
-  public readonly myForm = new FormGroup({
+  public readonly myForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   public addUserCard(): void {
-    if (this.isEdit) {
-      this.dialogRef.close({
-        id: this.user!.id,
-        ...this.myForm.value,
-      });
-    } else {
-      this.dialogRef.close({ ...this.myForm.value });
-    }
+    const user = this.isEdit
+      ? {
+          id: this.user!.id,
+          ...this.myForm.value,
+        }
+      : { ...this.myForm.value };
+    this.dialogRef.close(user);
   }
 
-  // field<T extends AbstractControl>(fieldName: string): T {
-  //   return this.myForm.get(fieldName) as T
-  // }
+  formControlInvalid(controlName: string) {
+    return (
+      this.myForm.controls[controlName].invalid &&
+      this.myForm.controls[controlName].touched
+    );
+  }
 
   get isEdit(): boolean {
     return Boolean(this.user);

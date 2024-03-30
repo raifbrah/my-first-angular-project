@@ -1,5 +1,4 @@
-<h2 mat-dialog-title *ngIf="!isEdit">Add User</h2>
-<h2 mat-dialog-title *ngIf="isEdit">Edit User</h2>
+<h2 mat-dialog-title>{{ isEdit ? "Edit User" : "Add User" }}</h2>
 
 <mat-dialog-content>
   <form [formGroup]="myForm" class="create-edit-user__form">
@@ -9,20 +8,22 @@
         matInput
         formControlName="name"
       />
-      <mat-error *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched">
-        Incoorect name!
+      <mat-error *ngIf="formControlInvalid('name')">
+        Incorrect name
       </mat-error>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Enter your username</mat-label>
       <input
         matInput
         formControlName="username"
       />
-      <mat-error *ngIf="myForm.controls['username'].invalid && myForm.controls['username'].touched">
+      <mat-error *ngIf="formControlInvalid('name')">
         Incoorect username!
       </mat-error>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Enter your email</mat-label>
       <input
@@ -30,7 +31,7 @@
         formControlName="email"
         placeholder="mail@gmail.com"
       />
-      <mat-error *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched">
+      <mat-error *ngIf="formControlInvalid('name')">
         Incorrect email!
       </mat-error>
     </mat-form-field>
@@ -43,7 +44,8 @@
     [disabled]="myForm.invalid"
     color="primary"
     mat-flat-button
-  >{{isEdit ? "Save" : "Create"}}</button>
+  >{{ isEdit ? "Save" : "Create" }}</button>
+
   <button
     mat-stroked-button
     mat-dialog-close
