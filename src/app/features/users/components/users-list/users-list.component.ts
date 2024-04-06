@@ -26,24 +26,10 @@ export class UsersListComponent {
     private matDialog: MatDialog,
     private storageService: StorageService,
   ) {
-    const users = this.storageService.getItem('users');
-
-    if (users === null || users.length === 0) {
-      this.usersApiService
-        .getUsers()
-        .pipe(
-          takeUntil(this.destroy$),
-          tap((data: User[]) => {
-            this.usersService.users = [...data];
-          }),
-        )
-        .subscribe();
-    } else {
-      this.usersService.users = [...users];
-    }
+    this.initUsers()
   }
 
-  addEditUser(user?: User) {
+  public addEditUser(user?: User) {
     const dialogRef = this.matDialog.open(CreateEditUserComponent, {
       data: user,
     });
@@ -60,12 +46,30 @@ export class UsersListComponent {
       .subscribe();
   }
 
-  deleteUser(user: User) {
+  public deleteUser(user: User) {
     this.usersService.deleteUser(user);
   }
 
   ngOnDestroy() {
     this.destroy$.next(null);
     this.destroy$.complete();
+  }
+
+  private initUsers() {
+    const users = this.storageService.getItem('users');
+
+    if (users === null || users.length === 0) {
+      this.usersApiService
+        .getUsers()
+        .pipe(
+          takeUntil(this.destroy$),
+          tap((data: User[]) => {
+            this.usersService.users = [...data];
+          }),
+        )
+        .subscribe();
+    } else {
+      this.usersService.users = [...users];
+    }
   }
 }
