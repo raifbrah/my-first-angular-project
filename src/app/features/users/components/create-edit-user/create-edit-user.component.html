@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{ isEdit ? "Edit User" : "Add User" }}</h2>
 
 <mat-dialog-content>
-  <form [formGroup]="myForm" class="create-edit-user__form">
+  <form [formGroup]="userForm" class="create-edit-user__form">
     <mat-form-field>
       <mat-label>Enter your name</mat-label>
       <input
@@ -41,7 +41,7 @@
 <mat-dialog-actions align="end">
   <button
     (click)="addUserCard()"
-    [disabled]="myForm.invalid"
+    [disabled]="userForm.invalid"
     color="primary"
     mat-flat-button
   >{{ isEdit ? "Save" : "Create" }}</button>

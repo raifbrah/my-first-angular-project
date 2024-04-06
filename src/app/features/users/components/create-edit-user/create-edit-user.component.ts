@@ -38,11 +38,11 @@ export class CreateEditUserComponent {
     @Inject(MAT_DIALOG_DATA) private readonly user?: User,
   ) {
     if (this.user) {
-      this.myForm.patchValue(this.user);
+      this.userForm.patchValue(this.user);
     }
   }
 
-  public readonly myForm: FormGroup = new FormGroup({
+  public readonly userForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -52,16 +52,16 @@ export class CreateEditUserComponent {
     const user = this.isEdit
       ? {
           id: this.user!.id,
-          ...this.myForm.value,
+          ...this.userForm.value,
         }
-      : { ...this.myForm.value };
+      : { ...this.userForm.value };
     this.dialogRef.close(user);
   }
 
   formControlInvalid(controlName: string) {
     return (
-      this.myForm.controls[controlName].invalid &&
-      this.myForm.controls[controlName].touched
+      this.userForm.controls[controlName].invalid &&
+      this.userForm.controls[controlName].touched
     );
   }
 
