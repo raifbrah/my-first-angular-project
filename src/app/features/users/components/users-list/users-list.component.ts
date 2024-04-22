@@ -56,7 +56,7 @@ export class UsersListComponent {
   }
 
   private initUsers() {
-    const users = this.storageService.getItem('users');
+    const users: (User[] | null) = this.storageService.getItem('users');
 
     if (users === null || users.length === 0) {
       this.usersApiService
