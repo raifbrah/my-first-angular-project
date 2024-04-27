@@ -14,16 +14,16 @@ export class UserCardComponent {
   user: User
 
   @Output()
-  deleteUser = new EventEmitter<string>()
+  deleteUser = new EventEmitter<User>()
 
   @Output()
-  editUser = new EventEmitter<string>()
+  editUser = new EventEmitter<User>()
 
   deleteUserCard() {
-    this.deleteUser.emit()
+    this.deleteUser.emit(this.user)
   }
 
   editUserCard() {
-    this.editUser.emit()
+    this.editUser.emit(this.user)
   }
 }

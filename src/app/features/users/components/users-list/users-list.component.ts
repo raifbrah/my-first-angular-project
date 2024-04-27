@@ -29,7 +29,7 @@ export class UsersListComponent {
     this.initUsers()
   }
 
-  public addEditUser(user?: User) {
+  addEditUser(user?: User) {
     const dialogRef = this.matDialog.open(CreateEditUserComponent, {
       data: user,
     });
@@ -46,7 +46,7 @@ export class UsersListComponent {
       .subscribe();
   }
 
-  public deleteUser(user: User) {
+  deleteUser(user: User) {
     this.usersService.deleteUser(user);
   }
 

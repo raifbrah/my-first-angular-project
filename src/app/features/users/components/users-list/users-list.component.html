@@ -10,8 +10,8 @@
     <user-card
       *ngFor="let user of usersService.users"
       [user]="user"
-      (deleteUser)="deleteUser(user)"
-      (editUser)="addEditUser(user)"
+      (deleteUser)="deleteUser($event)"
+      (editUser)="addEditUser($event)"
       class="user-card"
     ></user-card>
   </div>
