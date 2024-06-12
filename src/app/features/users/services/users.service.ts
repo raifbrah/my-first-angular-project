@@ -1,34 +1,21 @@
-import { Injectable } from "@angular/core";
-import { User } from "../models/user.interface";
-import { StorageService } from "../../../core/services/storage.service";
+import { Injectable, inject } from '@angular/core';
+import { User } from '../models/user.interface';
+import { Store } from '@ngrx/store';
+import * as UsersActions from '../+state/users.actions';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class UsersService {
-  constructor(
-    private storageService: StorageService
-  ) {}
-
-  users: User[] = []
+  private readonly store = inject(Store);
 
   public addEditUser(user: User): void {
-    if (user.id) {
-      this.users = this.users.map(mapUser => {
-        return mapUser.id === user.id
-          ? {...mapUser, ...user}
-          : mapUser
-      })
-      this.storageService.setItem('users', this.users)
-    } else {
-      this.users = [
-        ...this.users,
-        {...user, id: new Date().getTime()}
-      ]
-      this.storageService.setItem('users', this.users)
-    }
+    this.store.dispatch(UsersActions.addEditUser({ user: user }));
   }
 
   public deleteUser(user: User): void {
-    this.users = this.users.filter(filterUser => filterUser.id !== user.id)
-    this.storageService.setItem('users', this.users)
+    this.store.dispatch(UsersActions.deleteUser({ user: user }));
+  }
+
+  public initUsers(users: User[]): void {
+    this.store.dispatch(UsersActions.initUsers({ users: users }));
   }
 }

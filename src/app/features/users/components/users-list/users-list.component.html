@@ -8,7 +8,7 @@
   </button>
   <div class="user-cards-container">
     <user-card
-      *ngFor="let user of usersService.users"
+      *ngFor="let user of users$ | async"
       [user]="user"
       (deleteUser)="deleteUser($event)"
       (editUser)="addEditUser($event)"

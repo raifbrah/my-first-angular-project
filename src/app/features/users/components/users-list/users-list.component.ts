@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { UsersApiService } from '../../services/users-api.service';
 import { UsersService } from '../../services/users.service';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { User } from '../../models/user.interface';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateEditUserComponent } from '../create-edit-user/create-edit-user.component';
 import { StorageService } from '../../../../core/services/storage.service';
+import { Store } from '@ngrx/store';
+import * as UsersSelectors from '../../+state/users.selectors';
 
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [UserCardComponent, CommonModule, MatButtonModule],
+  imports: [UserCardComponent, CommonModule, MatButtonModule, AsyncPipe],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css',
 })
@@ -23,11 +25,15 @@ export class UsersListComponent {
   constructor(
     private usersApiService: UsersApiService,
     public usersService: UsersService,
-    private matDialog: MatDialog,
-    private storageService: StorageService,
+    private matDialog: MatDialog
   ) {
-    this.initUsers()
+    this.initUsers();
   }
+
+  private readonly store = inject(Store);
+  public readonly users$: Observable<User[]> = this.store.select(
+    UsersSelectors.selectUsers
+  );
 
   addEditUser(user?: User) {
     const dialogRef = this.matDialog.open(CreateEditUserComponent, {
@@ -41,7 +47,7 @@ export class UsersListComponent {
           if (tapUser) {
             this.usersService.addEditUser(tapUser);
           }
-        }),
+        })
       )
       .subscribe();
   }
@@ -56,20 +62,14 @@ export class UsersListComponent {
   }
 
   private initUsers() {
-    const users: (User[] | null) = this.storageService.getItem('users');
-
-    if (users === null || users.length === 0) {
-      this.usersApiService
-        .getUsers()
-        .pipe(
-          takeUntil(this.destroy$),
-          tap((data: User[]) => {
-            this.usersService.users = [...data];
-          }),
-        )
-        .subscribe();
-    } else {
-      this.usersService.users = [...users];
-    }
+    this.usersApiService
+      .getUsers()
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((data: User[]) => {
+          this.usersService.initUsers(data);
+        })
+      )
+      .subscribe();
   }
 }
